@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 
 class SearchBooks extends Component {
     render(){
+        const { searchBook } = this.props
         return(
-            <div>
-                Search Books Aqui
+            <div className="open-search">
+              <button onClick={() => this.setState({ searchBook: true })}>Add a book</button>
             </div>
         )
     }
