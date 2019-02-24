@@ -11,10 +11,12 @@ class Dashboard extends Component {
         return (
             <div>
                 <ListBooks 
-                books={books}
-                changeShelf={this.props.changeShelf}
+                    books={books}
+                    changeShelf={this.props.changeShelf}
                 />
                 <FilterBooks />
+                <SearchBooks 
+                    books={books}/>
             </div>
         )
     }
