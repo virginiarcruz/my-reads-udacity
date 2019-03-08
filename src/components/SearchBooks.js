@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-
-
-
+import {Link} from 'react-router-dom'
+import Book from './Book'
 class SearchBooks extends Component {
   
   render(){
+    console.log('filter', filteredBooks)
     
-    const {showSearchPage} = this.props
+    const {filteredBooks, searchBooks, updateOption, showSearchPage} = this.props
 
       console.log('show: ', showSearchPage)
 
@@ -14,11 +14,8 @@ class SearchBooks extends Component {
         <div className="search-books">
             { showSearchPage &&
               <div className="search-books-bar">
-                <button
-                  className="close-search"
-                  onClick={() => this.setState({ showSearchPage: false })}>
-                  Close
-                </button>
+               <Link to='/' className='close-search'>Close</Link>
+            
                   <div className="search-books-input-wrapper">
                     <input 
                       type="text"
@@ -29,7 +26,7 @@ class SearchBooks extends Component {
               }
             <div className="search-books-results">
               <ol className="books-grid">
-                <div> aqui </div>
+                  {/* {filteredBooks.map(book => (<Book book={book} key={book.id} updateOption={updateOption}/>))} */}
               </ol>
 
             </div>

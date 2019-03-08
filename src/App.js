@@ -25,9 +25,11 @@ class BooksApp extends React.Component {
       })
   }
 
+   // search books with the Search Terms
   searchBooks = (query) => {
     if (query) {
-      BooksAPI.search(query)
+      BooksAPI
+        .search(query)
         .then((result) => {
           this.updateSearchedResult(result)
           if (result.error !== 'empty query') {
@@ -41,28 +43,10 @@ class BooksApp extends React.Component {
     }
   }
 
-  
-  changeShelf = (e, filteredBook) => {
-    const books = this.state.books;
-    const shelf = e.target.value;
-    console.log('shelf; ', shelf)
-    filteredBook.shelf = e.target.value;
-    this.setState({
-      books
-  });
-  BooksAPI.update(filteredBook, shelf)
-      .then(() => {
-        this.setState(state => ({
-          books: state.books
-            .filter(book => book.id !== filteredBook.id)
-            .concat([filteredBook])
-        }));
-    });
-  };
-
   //is called when a shelf of the book is changed
   updateShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf)
+    BooksAPI
+      .update(book, shelf)
       .then(updated => (BooksAPI.getAll().then((books) => {
         this.setState({allBooks: books})
         this.updateSearchedResult(this.state.filteredBooks)
@@ -78,10 +62,15 @@ class BooksApp extends React.Component {
         }
       }
     }
-    this.setState({
-      filteredBooks: values
-    })
+    this.setState({filteredBooks: values})
   }
+
+
+  
+  
+  
+
+ 
 
   render() {
     console.log('books', this.state.books)
@@ -95,6 +84,7 @@ class BooksApp extends React.Component {
             filteredBooks={this.state.filteredBooks}
             updateOption={(book, shelf) => this.updateShelf(book, shelf)}
             showSearchPage={this.state.showSearchPage}
+            searchBooks={(query) => this.searchBooks(query)}
           />
          : (
           <div className="list-books">
