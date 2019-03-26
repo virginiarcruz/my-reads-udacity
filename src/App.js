@@ -43,14 +43,14 @@ updateShelf = (book, shelfName) => {
       <div className="app">
        <Route exact path='/' render={() => (
           <ListBooks
-          books={this.state.books}
-          onUpdateShelf={this.updateShelf}
+            books={this.state.books}
+            onUpdateShelf={this.updateShelf}
           />
         )} />
-        <Route exact path='/search' render={() => (
+        <Route path='/search' render={() => (
           <SearchBooks
-          books={this.state.books}
-          onUpdateShelf={this.updateShelf}
+            books={this.state.books}
+            onUpdateShelf={this.updateShelf}
           />
         )} />
       </div>

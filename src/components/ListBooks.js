@@ -21,41 +21,41 @@ class ListBooks extends Component {
         }
 
         return(
-                <div className="list-books">
-                    <div className="list-books-title">
-                        <h1>MyReads</h1>
-                    </div>
+            <div className="list-books">
+                <div className="list-books-title">
+                    <h1>MyReads</h1>
+                </div>
 
-                    <div className="list-books-content">
-                          <div>
-                            { shelfTypes.map((shelf) => (
-                                <div key={shelf.key} className="bookshelf">
-                                    <h2 className="bookshelf-title">{shelf.name}</h2>
-                                    
-                                    { getBooksForShelf(shelf.key).length === 0 ? (
-                                        <div className="bookshelf-books">
-                                            <h4>No books in this shelf</h4>
-                                        </div>
-                                        ) : (
-                                        <div className="bookshelf-books">
-                                            <ol className="books-grid">
-                                                { getBooksForShelf(shelf.key).map((book) => (
-                                                    <Book 
-                                                        key={book.id}
-                                                        book={book}
-                                                        updateShelf={onUpdateShelf}
-                                                    />
-                                                ))}
-                                            </ol>
-                                        </div> 
-                                    )}
-                                </div>
-                            )) }
-                        </div>
+                <div className="list-books-content">
+                    <div>
+                        { shelfTypes.map((shelf) => (
+                            <div key={shelf.key} className="bookshelf">
+                                <h2 className="bookshelf-title">{shelf.name}</h2>
+                                
+                                { getBooksForShelf(shelf.key).length === 0 ? (
+                                    <div className="bookshelf-books">
+                                        <h4>No books in this shelf</h4>
+                                    </div>
+                                    ) : (
+                                    <div className="bookshelf-books">
+                                        <ol className="books-grid">
+                                            { getBooksForShelf(shelf.key).map((book) => (
+                                                <Book 
+                                                    key={book.id}
+                                                    book={book}
+                                                    updateShelf={onUpdateShelf}
+                                                />
+                                            ))}
+                                        </ol>
+                                    </div> 
+                                )}
+                            </div>
+                        ))}
                     </div>
-                    <div className="open-search">
-                        <Link to='/search'>Add a book</Link>
-                    </div>
+                </div>
+                <div className="open-search">
+                    <Link to='/search'>Add a book</Link>
+                </div>
             </div>
         )
     }
