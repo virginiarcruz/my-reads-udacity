@@ -25,10 +25,13 @@ const Book = (props) => {
                             </select>
                         </div>
                     </div>
-                    <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{book.authors.map((author) => author)}
-                    </div>
-            </div>
+                   <div className="book-title">{book.title}</div>
+                        {book.authors ? (book.authors.length > 1 ? (book.authors.map((author) => (
+                            <div key={author} className="book-authors">{author}</div>
+                        ))) 
+                        : (<div className="book-authors">{book.authors}</div>)
+                    ) : (<div className="book-authors">Author Unknown</div>)}
+                 </div>
         </li>
     )
 }
