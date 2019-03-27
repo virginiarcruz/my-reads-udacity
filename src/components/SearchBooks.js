@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import { debounce } from 'throttle-debounce';
 import * as BooksAPI from '../utils/BooksAPI'
 import Book from './Book';
 
@@ -30,7 +31,7 @@ class SearchBooks extends Component {
       })
     }
 
-    bookSearch(query) {
+    bookSearch = debounce(300, false, query => {
       if (query.length > 0)
         BooksAPI.search(query)
         .then(searchResults => {
@@ -40,7 +41,8 @@ class SearchBooks extends Component {
             }))
           }
         );
-     }
+    });
+
 
      updateExistingShelves(searchResults) {
        if(!searchResults.error) {
@@ -65,11 +67,11 @@ class SearchBooks extends Component {
         <div className="search-books-bar">
           <Link to='/' className='close-search'>Close</Link>
           <div className='search-books-input-wrapper'>
-            <input
-              type="text"
-              placeholder="Search by title, author or subject"
-              value={query}
-              onChange={(event) => this.updateQuery(event.target.value)}/>
+               <input
+                type="text"
+                placeholder="Search by title, author or subject"
+                value={query}
+                onChange={(event) => this.updateQuery(event.target.value)}/>
           </div>
         </div>
 

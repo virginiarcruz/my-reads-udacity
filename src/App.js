@@ -10,29 +10,30 @@ class BooksApp extends React.Component {
     books: []
   }
 
-  componentDidMount() {
-    BooksAPI.getAll()
-    .then((books) => {
-      this.setState(() => ({
-        books
-      }))
+  async componentDidMount() {
+    const books = await BooksAPI.getAll()
+    this.setState({
+      books
     })
   }
 
-updateShelf = (book, shelfName) => {
-    const bookFromState = this.state.books.find(b => b.id === book.id);
-    if (bookFromState) {
-      bookFromState.shelf = shelfName;
-      BooksAPI.update(book, shelfName)
-      .then(this.setState(currentState => ({
-        books: currentState.books
-      })))
+
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).catch(err => {
+      console.log(err);
+      this.setState({
+        error: true
+      });
+    });
+    if (shelf === 'none') {
+      this.setState(prevState => ({
+        books: prevState.books.filter(b => b.id !== book.id)
+      }));
     } else {
-        book.shelf = shelfName;
-        BooksAPI.update(book, shelfName)
-        .then(this.setState(prevState => ({
-          books: prevState.books.concat(book)
-      })))
+      book.shelf = shelf;
+      this.setState(prevState => ({
+        books: prevState.books.filter(b => b.id !== book.id).concat(book)
+      }));
     }
   };
 
