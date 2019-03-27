@@ -16,7 +16,7 @@ For start was used [Create React App](https://github.com/facebookincubator/creat
 * Install all project dependencies with
 
     ```bash
-    npm install  yarn instal
+    npm install or  yarn instal
     ```
 
 * Start the development server with:
